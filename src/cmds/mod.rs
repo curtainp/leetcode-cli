@@ -4,9 +4,10 @@
 //! SUBCOMMANDS:
 //!     data    Manage Cache [aliases: d]
 //!     edit    Edit question by id [aliases: e]
+//!     submit  Submit question by id [aliases: s]
 //!     list    List problems [aliases: l]
 //!     pick    Pick a problem [aliases: p]
-//!     stat    Show simple chart about submissions [aliases: s]
+//!     stat    Show simple chart about submissions
 //!     test    Edit question by id [aliases: t]
 //!     help    Prints this message or the help of the given subcommand(s)
 //! ```
@@ -26,15 +27,15 @@ pub trait Command {
 
 mod data;
 mod edit;
-mod exec;
 mod list;
 mod pick;
 mod stat;
+mod submit;
 mod test;
 pub use data::DataCommand;
 pub use edit::EditCommand;
-pub use exec::ExecCommand;
 pub use list::ListCommand;
 pub use pick::PickCommand;
 pub use stat::StatCommand;
+pub use submit::SubmitCommand;
 pub use test::TestCommand;

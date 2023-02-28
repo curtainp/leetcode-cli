@@ -29,10 +29,10 @@
 //! SUBCOMMANDS:
 //!     data    Manage Cache [aliases: d]
 //!     edit    Edit question by id [aliases: e]
-//!     exec    Submit solution [aliases: x]
+//!     submit  Submit solution [aliases: s]
 //!     list    List problems [aliases: l]
 //!     pick    Pick a problem [aliases: p]
-//!     stat    Show simple chart about submissions [aliases: s]
+//!     stat    Show simple chart about submissions
 //!     test    Edit question by id [aliases: t]
 //!     help    Prints this message or the help of the given subcommand(s)
 //! ```

@@ -23,9 +23,7 @@ pub struct StatCommand;
 impl Command for StatCommand {
     /// `stat` usage
     fn usage() -> ClapCommand {
-        ClapCommand::new("stat")
-            .about("Show simple chart about submissions")
-            .visible_alias("s")
+        ClapCommand::new("stat").about("Show simple chart about submissions")
     }
 
     /// `stat` handler

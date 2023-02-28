@@ -1,17 +1,17 @@
-//! Exec command
+//! Submit command
 use super::Command;
 use crate::Error;
 use async_trait::async_trait;
 use clap::{Arg, ArgMatches, Command as ClapCommand};
 
-/// Abstract Exec Command
+/// Abstract Submit Command
 ///
 /// ```sh
-/// leetcode-exec
+/// leetcode-submit
 /// Submit solution
 ///
 /// USAGE:
-///     leetcode exec <id>
+///     leetcode submit <id>
 ///
 /// FLAGS:
 ///     -h, --help       Prints help information
@@ -20,15 +20,15 @@ use clap::{Arg, ArgMatches, Command as ClapCommand};
 /// ARGS:
 ///     <id>    question id
 /// ```
-pub struct ExecCommand;
+pub struct SubmitCommand;
 
 #[async_trait]
-impl Command for ExecCommand {
-    /// `exec` usage
+impl Command for SubmitCommand {
+    /// `submit` usage
     fn usage() -> ClapCommand {
-        ClapCommand::new("exec")
+        ClapCommand::new("submit")
             .about("Submit solution")
-            .visible_alias("x")
+            .visible_alias("s")
             .arg(
                 Arg::new("id")
                     .num_args(1)
@@ -38,7 +38,7 @@ impl Command for ExecCommand {
             )
     }
 
-    /// `exec` handler
+    /// `submit` handler
     async fn handler(m: &ArgMatches) -> Result<(), crate::Error> {
         use crate::cache::{Cache, Run};
 
