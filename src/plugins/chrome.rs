@@ -67,7 +67,7 @@ pub fn cookies() -> Result<Ident, crate::Error> {
         .load::<Cookies>(&conn)
         .expect("Loading cookies from google chrome failed.");
 
-    debug!("res {:?}", &res);
+    // debug!("res {:?}", &res);
     if res.is_empty() {
         return Err(crate::Error::CookieError);
     }
@@ -75,6 +75,7 @@ pub fn cookies() -> Result<Ident, crate::Error> {
     // Get system password
     let ring = Entry::new("Chrome Safe Storage", "Chrome");
     let pass = ring.get_password().expect("Get Password failed");
+    debug!("pass {}", pass);
 
     // Decode cookies
     let mut m: HashMap<String, String> = HashMap::new();
@@ -129,6 +130,7 @@ fn decode_cookies(pass: &str, v: Vec<u8>) -> Result<String, crate::Error> {
 
 /// Decrypt chrome cookie value with aes-128-cbc
 fn chrome_decrypt(v: Vec<u8>, key: [u8; 16]) -> Result<String, crate::Error> {
+    trace!("key {:?}", key);
     // <space>: \u16
     let iv = vec![32_u8; 16];
     let mut decrypter = symm::Crypter::new(
@@ -148,5 +150,9 @@ fn chrome_decrypt(v: Vec<u8>, key: [u8; 16]) -> Result<String, crate::Error> {
     decrypter.finalize(&mut plaintext[count..])?;
     plaintext.retain(|x| x >= &20_u8);
 
-    Ok(String::from_utf8_lossy(&plaintext.to_vec()).to_string())
+    let res = String::from_utf8_lossy(&plaintext.to_vec()).to_string();
+
+    trace!("decrypt result {}", res);
+
+    Ok(res)
 }
